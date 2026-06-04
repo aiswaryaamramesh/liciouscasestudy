@@ -138,7 +138,7 @@ export const issues = [
     detail: {
       ty: 'ROUTE · IN TRANSIT', c: 'bad', where: 'Bangalore → Mangalore line-haul',
       iss: 'Highway accident. 1,200 × RO40RE, <b>6h viability — recoverable in 2h.</b>',
-      blast: ['Mangalore AM slots', '~1,800 orders'],
+      blast: ['Mangalore hub', 'AM delivery slots'],
       rec: { c: 'act', t: 'Reroute via <b>Coimbatore WH</b> — has RO40RE buffer.', label: 'Reroute' },
     },
   },
@@ -151,7 +151,7 @@ export const issues = [
     detail: {
       ty: 'WAREHOUSE · COLD CHAIN', c: 'bad', where: 'Coimbatore WH → Kochi',
       iss: 'Refrigeration failed on Kochi-bound dock. <b>₹80k TU30YE warming.</b>',
-      blast: ['9 hubs', '~46 routes', 'Kochi ~1,100 orders'],
+      blast: ['9 hubs', '~46 routes', 'Kochi'],
       rec: { c: 'mit', t: 'Fix slower than spoilage. <b>Protect Kochi orders</b> — pull buffer.', label: 'Mitigate' },
     },
   },
