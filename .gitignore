@@ -1,0 +1,28 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env
+.env
+.env.local
+.env.*.local
+
+# editor / OS
+.DS_Store
+.vscode/
+.idea/
+
+# vercel
+.vercel
+
+# source briefs / working docs — not part of the app, keep out of the repo
+context.pdf
+licious.md
+additional.md

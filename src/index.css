@@ -1,0 +1,2870 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: #f7f4f1;
+}
+
+#app *,
+#app *::before,
+#app *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+#app {
+  --bg: #f7f4f1;
+  --paper: #fffdfb;
+  --ink: #3a3a3c;
+  --ink2: #6b6660;
+  --ink3: #a39d95;
+  --ink4: #c7c1b8;
+  --line: #ece7e1;
+  --line2: #f4f0eb;
+  --red: #cc0000; /* Licious brand red */
+  --redbg: #fdeaea;
+  --redtint: #fdf4f4;
+  --amber: #b9791a; /* readable amber for text; brand amber is #ffb732 */
+  --amberbg: #fbf1de;
+  --ambertint: #fdf9f3;
+  --green: #3f9d52;
+  --greenbg: #edf6ee;
+  --teal: #00b2b2; /* Licious accent teal */
+  --tealbg: #e3f6f6;
+  --blue: #3b6fed;
+  --bluebg: #eef2fe;
+  --plum: #9333c4;
+  --plumbg: #f6edfb;
+  --brandgrey: #4f5b66; /* Licious brand grey */
+  box-sizing: border-box;
+  font-family: 'Mukta', 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 16px;
+  background: var(--bg);
+  color: var(--ink);
+  padding: 14px 20px;
+  height: 100vh;
+  overflow: hidden;
+  letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+}
+#app .mono {
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+#app .top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 13px;
+}
+#app .top .l {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+#app .brand {
+  font-size: 23.5px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--brandgrey);
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+#app .brand .wm {
+  position: relative;
+}
+#app .brand .wm .smile {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 5px;
+  border-bottom: 2.5px solid var(--red);
+  border-radius: 0 0 60% 60%;
+}
+#app .brand .wm .di {
+  color: var(--red);
+}
+#app .brand .sep {
+  color: var(--ink3);
+  font-weight: 500;
+  font-size: 17px;
+  margin-left: 7px;
+}
+#app .tabs {
+  display: flex;
+  gap: 2px;
+  background: #eef0f3;
+  border-radius: 9px;
+  padding: 3px;
+}
+#app .tabs button {
+  border: none;
+  background: none;
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 15px;
+  color: var(--ink2);
+  font-weight: 500;
+  padding: 6px 13px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#app .tabs button.on {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  font-weight: 600;
+}
+#app .fresh {
+  font-size: 14.5px;
+  color: var(--ink2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+#app .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: p 2s infinite;
+}
+@keyframes p {
+  0% {
+    box-shadow: 0 0 0 0 rgba(47, 158, 68, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 5px rgba(47, 158, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(47, 158, 68, 0);
+  }
+}
+#app .risk {
+  font-size: 15px;
+  color: var(--ink2);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 7px 13px;
+  border-radius: 9px;
+}
+#app .risk b {
+  color: var(--red);
+  font-size: 19.5px;
+  font-weight: 700;
+}
+#app .top .r {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+/* four lens cards */
+#app .lenses {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 11px;
+  margin-bottom: 13px;
+}
+#app .lc {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 13px 15px;
+  box-shadow: 0 1px 2px rgba(20, 24, 30, 0.03);
+}
+#app .lc .lh {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 9px;
+}
+#app .lc .lname {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink2);
+}
+#app .lc .lstat {
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 20px;
+}
+#app .lstat.ok {
+  background: var(--greenbg);
+  color: var(--green);
+}
+#app .lstat.a {
+  background: var(--amberbg);
+  color: var(--amber);
+}
+#app .lstat.r {
+  background: var(--redbg);
+  color: var(--red);
+}
+#app .lc .lv {
+  font-size: 32.5px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+#app .lc .lv.r {
+  color: var(--red);
+}
+#app .lc .lv.a {
+  color: var(--amber);
+}
+#app .lc .lv u {
+  font-size: 15.5px;
+  color: var(--ink3);
+  text-decoration: none;
+  font-weight: 500;
+}
+#app .lc .lsub {
+  font-size: 13px;
+  color: var(--ink3);
+  margin-top: 6px;
+}
+
+#app .grid {
+  display: grid;
+  grid-template-columns: 1fr 372px;
+  gap: 14px;
+  align-items: stretch;
+  flex: 1;
+  min-height: 0;
+}
+#app .panel {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(20, 24, 30, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+#app .panel.rail {
+  overflow-y: auto;
+}
+#app .ph {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px 14px;
+  border-bottom: 1px solid var(--line2);
+  flex-shrink: 0;
+}
+/* match the right-panel header (.ctx-head) typography exactly */
+#app .ph h2 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+#app .ph .sub {
+  font-size: 16.5px;
+  color: var(--ink3);
+  margin-top: 3px;
+}
+
+#app .stage {
+  position: relative;
+  padding: 18px 18px 6px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+#app .stage > div:first-child {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+/* the SVG fills its measured container exactly — avoids any flex-vs-100% size
+   mismatch that would letterbox/stretch the chart while the window resizes */
+#app .stage svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+#app .nlab {
+  font-size: 12.5px;
+  fill: var(--ink2);
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-weight: 600;
+}
+#app .nvol {
+  font-size: 10.5px;
+  fill: var(--ink3);
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+#app .slab {
+  font-size: 11px;
+  fill: var(--ink3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-weight: 700;
+}
+#app .rib {
+  transition: opacity 0.18s;
+  cursor: pointer;
+}
+#app .rib.alert {
+  animation: d 1s linear infinite;
+}
+@keyframes d {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+#app rect.node.bad {
+  cursor: pointer;
+}
+#app rect.node.bad:hover {
+  filter: brightness(0.95);
+}
+#app .badge text {
+  fill: #fff;
+  font-size: 10.5px;
+  font-weight: 700;
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+#app .lg {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  color: var(--ink3);
+  padding: 4px 18px 14px;
+  flex-shrink: 0;
+}
+#app .lg span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+#app .lg .sq {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+#app .lg .pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--red);
+  animation: bl 1.2s infinite;
+}
+@keyframes bl {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+#app .pop {
+  position: absolute;
+  width: 250px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 16px 44px rgba(20, 24, 30, 0.16);
+  z-index: 30;
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: 0.15s;
+  overflow: hidden;
+}
+#app .pop.show {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+#app .pop .pt {
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--line2);
+}
+#app .pop .pt .ty {
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+#app .pop .pt .ty .pin {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+#app .pop .pt .ty.bad {
+  color: var(--red);
+}
+#app .pop .pt .ty.smoke {
+  color: var(--amber);
+}
+#app .pop .pt .nm {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 3px;
+}
+#app .pop .pt .stg {
+  font-size: 13px;
+  color: var(--ink2);
+  margin-top: 1px;
+}
+#app .pop .pb {
+  padding: 11px 14px 13px;
+}
+#app .pop .iss {
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--ink2);
+  margin-bottom: 10px;
+}
+#app .pop .iss b {
+  color: var(--ink);
+  font-weight: 600;
+}
+#app .pop .blast {
+  background: var(--bg);
+  border-radius: 9px;
+  padding: 9px 11px;
+  margin-bottom: 10px;
+}
+#app .pop .blast .bl {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink3);
+  margin-bottom: 5px;
+}
+#app .pop .blast .bf {
+  font-size: 13.5px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+#app .pop .blast .bf .a {
+  color: var(--ink3);
+}
+#app .pop .rec2 .rl {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink3);
+  font-weight: 700;
+  margin-bottom: 7px;
+}
+#app .pop .rec2 .rt2 {
+  font-size: 13.5px;
+  color: var(--ink2);
+  line-height: 1.35;
+  margin-bottom: 9px;
+}
+#app .pop .rec2 .rt2 b {
+  color: var(--ink);
+}
+#app .pop .rec2 .rgo {
+  width: 100%;
+  border: none;
+  border-radius: 9px;
+  padding: 9px;
+  font-size: 14.5px;
+  font-weight: 600;
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  cursor: pointer;
+  color: #fff;
+}
+/* all recommendation CTAs share the one primary (brand) colour */
+#app .pop .rec2 .rgo.act,
+#app .pop .rec2 .rgo.mit,
+#app .pop .rec2 .rgo.prevent {
+  background: var(--ink);
+}
+
+#app .rail .ph2 {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#app .rail .ph2 h2 {
+  font-size: 17px;
+  font-weight: 700;
+}
+#app .rail .ph2 .cnt {
+  font-size: 13px;
+  background: var(--redbg);
+  color: var(--red);
+  font-weight: 700;
+  border-radius: 20px;
+  padding: 2px 7px;
+}
+#app .grp {
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink3);
+  font-weight: 700;
+  padding: 12px 16px 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+#app .grp .gm {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+}
+#app .grp.smoke {
+  color: var(--amber);
+}
+#app .grp.smoke .gm {
+  background: none;
+  border: 1.5px dashed var(--amber);
+}
+#app .list {
+  padding: 0 9px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#app .ac {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 11px 12px;
+  cursor: pointer;
+  transition: box-shadow 0.14s, border-color 0.14s;
+}
+#app .ac:hover {
+  box-shadow: 0 5px 16px rgba(20, 24, 30, 0.08);
+  border-color: #ddd6cd;
+}
+/* severity now reads from the colour-coded score tag, not a left side-border */
+#app .ac .score {
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 4px 10px;
+  border-radius: 7px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+#app .ac .score.hi {
+  background: var(--redbg);
+  color: var(--red);
+}
+#app .ac .score.mid {
+  background: var(--amberbg);
+  color: var(--amber);
+}
+#app .ac .score.lo {
+  background: var(--bg);
+  color: var(--ink2);
+}
+#app .ac .r1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+#app .ac .tt {
+  flex: 1;
+  min-width: 0;
+  font-size: 16.5px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+#app .ac .tt .scn {
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 13px;
+  color: var(--ink3);
+  font-weight: 600;
+  margin-left: 5px;
+}
+#app .ac .tt .fl {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 7px;
+  background: var(--plumbg);
+  color: var(--plum);
+  margin-left: 4px;
+  letter-spacing: 0.04em;
+}
+#app .ac .vd {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+#app .vd.save {
+  background: var(--greenbg);
+  color: var(--green);
+}
+#app .vd.lose {
+  background: var(--redbg);
+  color: var(--red);
+}
+#app .vd.prevent {
+  background: var(--amberbg);
+  color: var(--amber);
+}
+#app .ac .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+}
+#app .ac .chip {
+  font-size: 12.5px;
+  color: var(--ink2);
+  background: var(--bg);
+  border-radius: 6px;
+  padding: 3px 7px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+#app .ac .chip svg {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+#app .ac .chip b {
+  color: var(--ink);
+  font-weight: 600;
+}
+/* status chip mirrors the score tag exactly — same pill, only the colour differs */
+#app .ac .chip.stat {
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 4px 10px;
+  border-radius: 7px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  color: var(--sc);
+  background: color-mix(in srgb, var(--sc) 13%, transparent);
+}
+#app .ac .chip.clk.urgent {
+  background: var(--redbg);
+  color: var(--red);
+  font-weight: 600;
+}
+#app .ac .chip.clk.urgent svg {
+  opacity: 0.9;
+}
+/* key/value meta under the header: viability · blast radius · orders */
+#app .ac .ac-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+#app .ac .acm {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 12.5px;
+}
+#app .ac .acm-k {
+  flex-shrink: 0;
+  width: 86px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--ink3);
+  font-weight: 500;
+}
+#app .ac .acm-k svg {
+  width: 11px;
+  height: 11px;
+  opacity: 0.65;
+}
+#app .ac .acm-v {
+  flex: 1;
+  min-width: 0;
+  color: var(--ink);
+  font-weight: 600;
+}
+#app .ac .acm-v.urgent {
+  color: var(--red);
+}
+#app .batched {
+  margin: 9px;
+  padding: 10px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: var(--ink3);
+  text-align: center;
+}
+#app .batched a {
+  color: var(--blue);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ── Map view ── */
+#app .mappanel {
+  overflow: hidden;
+}
+#app .maptools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 9px 16px;
+  border-bottom: 1px solid var(--line2);
+  flex-shrink: 0;
+}
+#app .maptools .ttl {
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink3);
+  font-weight: 700;
+  margin-right: 2px;
+}
+#app .fchip {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink2);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 5px 11px;
+  cursor: pointer;
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+#app .fchip:hover {
+  border-color: #d9d2c8;
+}
+#app .fchip.on {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
+#app .fchip.clear {
+  color: var(--ink3);
+  border-style: dashed;
+}
+#app .mappanel .stage {
+  padding: 6px 10px 2px;
+}
+#app .mappanel svg {
+  cursor: default;
+}
+#app .region {
+  font-size: 14.5px;
+  fill: #d8cfc2;
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+#app .pcode {
+  font-size: 10.5px;
+  fill: var(--ink2);
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  font-weight: 600;
+  pointer-events: none;
+}
+#app .wcode {
+  font-size: 11.5px;
+  fill: var(--ink);
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  font-weight: 600;
+  pointer-events: none;
+}
+#app .wcount {
+  font-size: 11.5px;
+  fill: #fff;
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  font-weight: 700;
+  pointer-events: none;
+}
+#app .whbang {
+  fill: #fff;
+  font-size: 10.5px;
+  font-weight: 800;
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  pointer-events: none;
+}
+#app .hublabel {
+  font-size: 9px;
+  fill: var(--ink2);
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  font-weight: 600;
+  pointer-events: none;
+  paint-order: stroke;
+  stroke: #fffdfb;
+  stroke-width: 2.4px;
+}
+#app .leglabel {
+  font-size: 9px;
+  fill: #a8843f;
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  font-weight: 600;
+  pointer-events: none;
+  paint-order: stroke;
+  stroke: #fffdfb;
+  stroke-width: 2.6px;
+}
+#app .leglabel.teal {
+  fill: #2f8f9c;
+}
+#app .whnode:hover rect {
+  filter: brightness(0.96);
+}
+#app .pwleg.alert path {
+  animation: d 1s linear infinite;
+}
+#app .lg .lk {
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+  display: inline-block;
+}
+#app .lg .lk.dash {
+  background-image: none;
+  height: 0;
+  border-top: 2px dashed var(--red);
+  background: none !important;
+}
+
+/* ── Leaflet map ── */
+#app .mappanel .stage {
+  padding: 8px 10px 2px;
+}
+#app .leafmap {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #eee9e2;
+}
+#app .leaflet-container {
+  font-family: 'Mukta', sans-serif;
+  background: #eee9e2;
+}
+#app .leaflet-control-zoom a {
+  border-radius: 7px !important;
+  color: var(--ink2);
+  font-size: 19.5px;
+}
+#app .leaflet-control-zoom {
+  border: none !important;
+  box-shadow: 0 1px 4px rgba(20, 24, 30, 0.14);
+  border-radius: 8px;
+  overflow: hidden;
+}
+#app .leaflet-bar a {
+  border-bottom-color: var(--line);
+}
+
+/* warehouse marker */
+#app .mk-wrap {
+  background: none;
+  border: none;
+}
+#app .mk-wh {
+  position: relative;
+  width: var(--s);
+  height: var(--s);
+}
+#app .mk-wh::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--c);
+  border: 2px solid #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+#app .mk-wh .b {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  font-weight: 700;
+  font-size: 14.5px;
+}
+#app .mk-wh .em {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--ink);
+  white-space: nowrap;
+  text-shadow: 0 1px 3px #fff, 0 0 2px #fff;
+}
+#app .mk-wh .u {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #fff;
+}
+/* producer marker */
+#app .mk-prod {
+  position: relative;
+  width: 12px;
+  height: 12px;
+}
+#app .mk-prod .i {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  border: 2px solid var(--c);
+  transform: rotate(45deg);
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+#app .mk-prod .em {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  font-weight: 600;
+  font-size: 11px;
+  color: var(--ink2);
+  white-space: nowrap;
+  text-shadow: 0 1px 3px #fff;
+}
+
+/* tooltips */
+#app .leaflet-tooltip.leg-tip {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: #a8741a;
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 0;
+  text-shadow: 0 1px 3px #fff, 0 0 3px #fff, 0 0 3px #fff;
+  white-space: nowrap;
+}
+#app .leaflet-tooltip.leg-tip.bad {
+  color: var(--red);
+}
+#app .leaflet-tooltip.leg-tip::before {
+  display: none;
+}
+#app .leaflet-tooltip.hub-tip {
+  background: #fffdfb;
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 8px rgba(20, 24, 30, 0.12);
+  color: var(--ink);
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 7px;
+  padding: 2px 7px;
+}
+#app .leaflet-tooltip.hub-tip.code {
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  color: var(--teal);
+}
+#app .leaflet-tooltip.hub-tip::before {
+  display: none;
+}
+
+/* leaflet popup → reuse our card styles */
+#app .leaflet-popup.bl-pop .leaflet-popup-content-wrapper {
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 16px 44px rgba(20, 24, 30, 0.18);
+}
+#app .leaflet-popup.bl-pop .leaflet-popup-content {
+  margin: 0;
+  width: 250px !important;
+}
+#app .leaflet-popup.bl-pop .leaflet-popup-tip {
+  display: none;
+}
+#app .pop.pop-static {
+  position: static;
+  opacity: 1;
+  transform: none;
+  box-shadow: none;
+  border: none;
+  width: 250px;
+  pointer-events: auto;
+}
+
+/* segmented view control in panel header */
+#app .ph .seg {
+  display: flex;
+  gap: 2px;
+  background: #efece7;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 2px;
+  flex-shrink: 0;
+}
+#app .ph .seg button {
+  border: none;
+  background: none;
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 13.5px;
+  color: var(--ink2);
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+#app .ph .seg button.on {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  font-weight: 600;
+}
+
+/* ── Sankey nodes (clickable) ── */
+/* the SVG provides its own 28px side padding, so keep the stage box flush */
+#app .mappanel .sankey-stage {
+  padding: 12px 4px 2px;
+}
+#app .snode {
+  cursor: pointer;
+  transition: filter 0.12s;
+}
+#app .snode:hover {
+  filter: brightness(0.92);
+}
+#app .snlab {
+  font-size: 13px;
+  fill: var(--ink);
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+}
+#app .snvol {
+  font-size: 10.5px;
+  fill: var(--ink2);
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  cursor: pointer;
+}
+/* predicted / forecast ribbons stay STATIC dashed (a moving dash would read as
+   "actively happening now" — the opposite of a forecast) */
+/* flow-legend line swatches (solid = actual, dashed = predicted) */
+#app .lg .flk {
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--ink2);
+  display: inline-block;
+}
+#app .lg .flk.dash {
+  height: 2px;
+  border-radius: 0;
+  background: repeating-linear-gradient(to right, var(--ink2) 0 4px, transparent 4px 7px);
+}
+#app .snode.sel + .snlab,
+#app .snode.sel {
+  fill-opacity: 1;
+}
+#app .sbang {
+  fill: #fff;
+  font-size: 7.5px;
+  font-weight: 800;
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  pointer-events: none;
+}
+#app .sslab {
+  font-size: 12px;
+  fill: var(--ink2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-weight: 700;
+}
+
+/* ── Context panel (right) ── */
+#app .ctx {
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-width: 0;
+}
+#app .ctx-head {
+  padding: 16px 18px 14px;
+  border-bottom: 1px solid var(--line2);
+  flex-shrink: 0;
+}
+#app .ctx-head .back {
+  border: none;
+  background: none;
+  color: var(--ink2);
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 15.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0 0 6px;
+}
+#app .ctx-head .back:hover {
+  color: var(--ink);
+}
+#app .ch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+#app .ch-row h2 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+#app .ch-sub {
+  font-size: 16.5px;
+  color: var(--ink3);
+  margin-top: 3px;
+}
+#app .pill {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+#app .pill.ok {
+  background: var(--greenbg);
+  color: var(--green);
+}
+#app .pill.warn {
+  background: var(--amberbg);
+  color: var(--amber);
+}
+#app .pill.bad {
+  background: var(--redbg);
+  color: var(--red);
+}
+#app .ctx-sec {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line2);
+}
+#app .ctx-sec:last-child {
+  border-bottom: none;
+}
+#app .sec-t {
+  font-size: 14.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink3);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#app .sec-t .cnt {
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 14.5px;
+  color: var(--ink2);
+  background: var(--bg);
+  border-radius: 20px;
+  padding: 1px 8px;
+}
+#app .sec-t .scope-hint {
+  margin-left: auto;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink4);
+  font-size: 13.5px;
+}
+#app .sec-t .viewall {
+  margin-left: auto;
+  border: none;
+  background: none;
+  color: var(--blue);
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+  padding: 0;
+  cursor: pointer;
+}
+#app .sec-t .viewall:hover {
+  text-decoration: underline;
+}
+#app .mgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  min-width: 0;
+}
+#app .mtile {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 11px 13px;
+  min-width: 0;
+}
+#app .mtile .mk {
+  font-size: 15px;
+  color: var(--ink3);
+  font-weight: 500;
+}
+/* metric values use the page sans (Mukta) for consistency — numbers render big */
+#app .mtile .mv {
+  font-size: 24.5px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 3px;
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  overflow-wrap: anywhere;
+}
+/* word/phrase/code values: same font, smaller so long values don't overflow */
+#app .mtile .mv.txt {
+  font-size: 16.5px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1.25;
+}
+#app .mtile .mv.r {
+  color: var(--red);
+}
+#app .mtile .mv.a {
+  color: var(--amber);
+}
+#app .mtile .mv.ok {
+  color: var(--green);
+}
+#app .ilist {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+#app .empty {
+  font-size: 14px;
+  color: var(--ink3);
+  background: var(--bg);
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+#app .ac .tt {
+  font-size: 15.5px;
+}
+#app .ac .scn {
+  font-size: 12.5px;
+}
+#app .ac .chip {
+  font-size: 12.5px;
+}
+#app .ac .vd {
+  font-size: 11px;
+}
+
+/* inline issue detail inside a card */
+#app .idetail {
+  margin-top: 11px;
+  padding-top: 11px;
+  border-top: 1px solid var(--line2);
+}
+#app .idetail .iss {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ink2);
+  margin-bottom: 11px;
+}
+#app .idetail .iss b {
+  color: var(--ink);
+  font-weight: 600;
+}
+#app .idetail .blast {
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 11px;
+}
+#app .idetail .blast .bl {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink3);
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+#app .idetail .blast .bf {
+  font-size: 13px;
+  color: var(--ink);
+}
+#app .idetail .blast .bf .a {
+  color: var(--ink3);
+}
+#app .idetail .rec2 .rl {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink3);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+#app .idetail .rec2 .rt2 {
+  font-size: 13.5px;
+  color: var(--ink2);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+#app .idetail .rec2 .rt2 b {
+  color: var(--ink);
+  font-weight: 600;
+}
+#app .idetail .rec2 .rgo {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  cursor: pointer;
+  color: #fff;
+  background: var(--ink);
+  transition: background 0.12s;
+}
+#app .idetail .rec2 .rgo:hover {
+  background: #2a2a2c;
+}
+
+/* ── chart header filters ── */
+#app .mapfilters-top {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+/* ── custom (non-native) dropdown ── */
+#app .dd {
+  position: relative;
+  display: inline-block;
+}
+#app .dd-trig {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid #ded7cd;
+  border-radius: 9px;
+  padding: 8px 12px;
+  cursor: pointer;
+  max-width: 210px;
+  box-shadow: 0 1px 2px rgba(20, 24, 30, 0.05);
+  transition: border-color 0.12s, box-shadow 0.12s;
+}
+#app .dd-trig:hover {
+  border-color: #cdc4b7;
+  box-shadow: 0 2px 6px rgba(20, 24, 30, 0.08);
+}
+#app .dd.open .dd-trig {
+  border-color: var(--ink3);
+}
+#app .dd-val {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#app .dd-chev {
+  width: 13px;
+  height: 13px;
+  color: var(--ink2);
+  flex-shrink: 0;
+  transition: transform 0.16s;
+}
+#app .dd.open .dd-chev {
+  transform: rotate(180deg);
+}
+#app .dd-pop {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 40;
+  width: 232px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 16px 44px rgba(20, 24, 30, 0.16);
+  padding: 6px;
+}
+#app .dd-pop.left {
+  right: auto;
+  left: 0;
+}
+#app .dd-search {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 13.5px;
+  color: var(--ink);
+  background: var(--bg);
+  margin-bottom: 6px;
+  outline: none;
+}
+#app .dd-search:focus {
+  border-color: var(--ink3);
+}
+#app .dd-list {
+  max-height: 290px;
+  overflow-y: auto;
+}
+#app .dd-grp {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink3);
+  font-weight: 700;
+  padding: 8px 8px 3px;
+}
+#app .dd-opt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 13.5px;
+  color: var(--ink);
+  padding: 7px 9px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+#app .dd-opt-main { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+#app .dd-opt-label { font-weight: 600; }
+#app .dd-opt-sub { font-size: 11.5px; font-weight: 500; color: var(--ink3); }
+#app .dd-opt:hover {
+  background: var(--bg);
+}
+#app .dd-opt.sel .dd-opt-label {
+  font-weight: 700;
+}
+#app .dd-opt.sel {
+  background: #efeae3;
+}
+#app .dd-check { color: var(--ink2); flex-shrink: 0; }
+#app .dd-empty {
+  font-size: 13px;
+  color: var(--ink3);
+  padding: 12px 8px;
+  text-align: center;
+}
+
+/* failure-reason tag inside the chart */
+#app .sreason {
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 9.5px;
+  font-weight: 600;
+}
+
+/* ── capacity rings + warehouse rows ── */
+#app .cring-t {
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 12px;
+  font-weight: 700;
+}
+#app .whlist {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+#app .whrow {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 6px 4px;
+  border-radius: 10px;
+}
+#app .whrow:hover {
+  background: var(--bg);
+}
+#app .cring {
+  flex-shrink: 0;
+}
+#app .whmeta {
+  flex: 1;
+  min-width: 0;
+}
+#app .whn {
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink);
+}
+#app .wha {
+  font-size: 12px;
+  color: var(--ink3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#app .whstat {
+  font-size: 11.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px;
+  border-radius: 20px;
+}
+#app .whstat .whchev {
+  font-size: 12px;
+  opacity: 0.7;
+}
+#app .whstat .whx {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+}
+#app .whstat.r .whx {
+  background: var(--red);
+}
+#app .whstat.a .whx {
+  background: var(--amber);
+}
+#app .whstat.clear {
+  background: none;
+  color: var(--ink4);
+  padding: 2px 4px;
+}
+#app .sec-t .scope-hint.has-iss {
+  color: var(--red);
+  font-weight: 700;
+}
+#app .whstat.r {
+  color: var(--red);
+  background: var(--redbg);
+}
+#app .whstat.a {
+  color: var(--amber);
+  background: var(--amberbg);
+}
+#app .whstat.ok {
+  color: var(--green);
+  background: var(--greenbg);
+}
+#app .whrow.open {
+  background: var(--bg);
+}
+#app .whissues {
+  list-style: none;
+  margin: 0 4px 6px 55px;
+  padding: 2px 0 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+#app .whissues li {
+  font-size: 12.5px;
+  color: var(--ink2);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+#app .whissues .widot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+#app .whissues .widot.r {
+  background: var(--red);
+}
+#app .whissues .widot.a {
+  background: var(--amber);
+}
+#app .whissues .widot.ok {
+  background: var(--green);
+}
+
+/* ── visible top nav bar — full-bleed, flush to the top & sides ── */
+#app .topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--paper);
+  border: none;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  padding: 12px 20px;
+  margin: -14px -20px 14px;
+  flex-shrink: 0;
+}
+#app .topbar .l {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+#app .topbar .r {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+/* shared filters (drive both panels below) */
+#app .topfilters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+/* view header + filters row, sitting under the nav, outside the cards */
+#app .viewhead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 13px;
+  flex-shrink: 0;
+}
+#app .vh-title h1 {
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+#app .vh-title .vsub {
+  font-size: 14.5px;
+  color: var(--ink3);
+  margin-top: 2px;
+}
+#app .logo {
+  flex-shrink: 0;
+}
+#app .acct {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+#app .acct:hover {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: #d9d2c8;
+}
+
+/* ── shared score chip (used in cards, modal, table) ── */
+#app .score {
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 3px 8px;
+  border-radius: 7px;
+  white-space: nowrap;
+}
+#app .score.hi { background: var(--redbg); color: var(--red); }
+#app .score.mid { background: var(--amberbg); color: var(--amber); }
+#app .score.lo { background: var(--bg); color: var(--ink2); }
+
+/* generic chip icon sizing (used in cards, side panel, etc.) */
+#app .chip svg {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+/* ── expanded issue side panel (slides in from the right) ── */
+#app .sp-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(20, 24, 30, 0.42);
+  display: flex;
+  justify-content: flex-end;
+  -webkit-font-smoothing: antialiased;
+  animation: sp-fade 0.18s ease;
+}
+@keyframes sp-fade {
+  from { opacity: 0; }
+}
+#app .sp {
+  background: var(--paper);
+  width: 480px;
+  max-width: 100%;
+  height: 100vh;
+  box-shadow: -20px 0 60px rgba(20, 24, 30, 0.26);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: sp-slide 0.24s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+#app .sp.sp-wide { width: 860px; }
+@keyframes sp-slide {
+  from { transform: translateX(100%); }
+}
+#app .sp-head {
+  padding: 16px 22px 14px;
+  border-bottom: 1px solid var(--line2);
+  flex-shrink: 0;
+}
+#app .sp-head-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#app .sp-ty {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink3);
+}
+#app .sp-close {
+  border: none;
+  background: var(--bg);
+  color: var(--ink2);
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+#app .sp-close:hover { background: #ece7e1; color: var(--ink); }
+#app .sp-titlerow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+}
+#app .sp-titlerow h2 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+#app .sp-ttags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+/* score + status read as a matched pair: identical pill, only the colour differs */
+#app .sp-ttags .score { font-size: 13.5px; padding: 4px 10px; }
+#app .sp-status-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  padding: 4px 10px;
+  border-radius: 7px;
+  color: var(--sc);
+  background: color-mix(in srgb, var(--sc) 13%, transparent);
+}
+#app .sp-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 11px;
+}
+#app .sp-chips .chip {
+  font-size: 12.5px;
+  color: var(--ink2);
+  background: var(--bg);
+  border-radius: 6px;
+  padding: 3px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+#app .sp-chips .chip b { color: var(--ink); font-weight: 600; }
+#app .sp-chips .chip.plain { color: var(--ink3); }
+#app .sp-chips .chip.clk.urgent { background: var(--redbg); color: var(--red); font-weight: 600; }
+#app .sp-chips .chip.clk.urgent svg { opacity: 0.9; }
+
+#app .sp-body {
+  padding: 18px 22px 26px;
+  overflow-y: auto;
+  flex: 1;
+}
+/* two-column body: what's happened | what to do now */
+#app .sp-body.sp-grid {
+  display: grid;
+  grid-template-columns: 1.04fr 1fr;
+  grid-template-rows: minmax(0, 1fr);
+  padding: 0;
+  overflow: hidden; /* each column scrolls on its own, not the whole panel */
+  min-height: 0;
+}
+#app .sp-col {
+  padding: 18px 22px 26px;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+}
+#app .sp-col-r { border-left: 1px solid var(--line2); }
+#app .sp-colhead {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink3);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+
+/* route map (Leaflet) */
+#app .routemap {
+  height: 220px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  margin-bottom: 4px;
+  background: #eef0f1;
+  z-index: 0;
+}
+#app .routemap .leaflet-container {
+  height: 100%;
+  background: #eef0f1;
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+#app .rm-mk-wrap {
+  background: transparent;
+  border: none;
+}
+#app .rm-mk {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+#app .rm-mk.ok { background: #3f9d52; }
+#app .rm-mk.warn { background: #b9791a; }
+#app .rm-mk.bad { background: #cc0000; }
+#app .rm-mk.pending { background: #9b958c; }
+#app .rm-mk.cur { animation: rm-pulse 1.5s infinite; }
+@keyframes rm-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(59, 111, 237, 0.22), 0 1px 4px rgba(0, 0, 0, 0.35); }
+  50% { box-shadow: 0 0 0 8px rgba(59, 111, 237, 0.05), 0 1px 4px rgba(0, 0, 0, 0.35); }
+}
+#app .rm-mk.bad.cur { animation: rm-pulse-bad 1.5s infinite; }
+@keyframes rm-pulse-bad {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.22), 0 1px 4px rgba(0, 0, 0, 0.35); }
+  50% { box-shadow: 0 0 0 8px rgba(204, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.35); }
+}
+#app .leaflet-tooltip.rm-tip {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 8px rgba(20, 24, 30, 0.14);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 7px;
+  padding: 3px 8px;
+}
+#app .leaflet-tooltip.rm-tip.cur { color: var(--blue); border-color: #cdd8f6; }
+#app .leaflet-tooltip.rm-tip::before { display: none; }
+#app .routemap .leaflet-control-zoom {
+  border: none;
+  box-shadow: none;
+  margin: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+#app .routemap .leaflet-control-zoom a {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border: none;
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink2);
+  font-size: 18px;
+  box-shadow: 0 1px 4px rgba(20, 24, 30, 0.22);
+}
+#app .routemap .leaflet-control-zoom a:hover { background: var(--bg); color: var(--ink); }
+
+/* assignee row */
+/* assignee block — same section-header style as Comments */
+#app .sp-assignsec { margin-bottom: 4px; }
+#app .sp-assignsec .sp-sec-t { margin-bottom: 8px; }
+#app .sp-assignsec .dd { display: block; }
+/* avatar + name trigger (full-width person chip) */
+#app .dd.dd-avatar { display: block; }
+#app .dd.dd-avatar .dd-trig {
+  width: 100%;
+  max-width: none; /* fill the panel, not the 210px cap on the base trigger */
+  border: 1px solid #ded7cd;
+  background: var(--paper);
+  box-shadow: 0 1px 2px rgba(20, 24, 30, 0.04);
+  padding: 8px 12px 8px 8px;
+  border-radius: 11px;
+  gap: 11px;
+}
+#app .dd.dd-avatar .dd-trig:hover { border-color: #cdc4b7; }
+#app .dd.dd-avatar.open .dd-trig { border-color: var(--ink3); }
+#app .dd-valwrap { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; text-align: left; }
+#app .dd.dd-avatar .dd-val { font-size: 15px; font-weight: 600; color: var(--ink); }
+#app .dd-val-sub {
+  font-size: 12px;
+  color: var(--ink3);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#app .dd.dd-avatar .dd-chev { margin-left: auto; }
+/* the avatar (assignee) dropdown menu spans the full container, like its trigger */
+#app .dd.dd-avatar .dd-pop {
+  width: auto;
+  left: 0;
+  right: 0;
+}
+#app .dd-av {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #69c3c8;
+  color: #0b545b;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+#app .sp-assign {
+  display: flex;
+  align-items: center;
+  gap: 10px 12px;
+  flex-wrap: wrap;
+}
+#app .sp-mk {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink3);
+  font-weight: 700;
+}
+#app .sp-assign-me {
+  border: none;
+  background: none;
+  color: var(--blue);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  white-space: nowrap;
+}
+#app .sp-assign-me:hover { text-decoration: underline; }
+#app .sp-fu-note {
+  font-size: 12px;
+  color: var(--ink3);
+  margin: -3px 0 9px;
+  line-height: 1.4;
+}
+#app .sp-person-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--ink2);
+}
+#app .sp-pl-role { font-weight: 600; color: var(--ink); }
+#app .sp-pl-contact { display: inline-flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+#app .sp-pl-contact a { color: var(--blue); text-decoration: none; font-weight: 500; }
+#app .sp-pl-contact a:hover { text-decoration: underline; }
+#app .sp-dot-sep { color: var(--ink4); }
+
+/* root cause callout */
+#app .sp-root {
+  margin-top: 14px;
+  background: var(--redtint);
+  border: 1px solid #f3dede;
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+#app .sp-root-k {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--red);
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+#app .sp-root-v { font-size: 14px; color: var(--ink); line-height: 1.5; }
+
+/* collapsible sections */
+#app .sp-sec { border-top: 1px solid var(--line2); margin-top: 6px; }
+#app .sp-sec-h {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  padding: 15px 0 13px;
+  cursor: pointer;
+  font-family: inherit;
+}
+#app .sp-sec-t {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#app .sp-cnt {
+  font-family: 'Spline Sans Mono', ui-monospace, Menlo, monospace;
+  font-size: 12px;
+  color: var(--ink2);
+  background: var(--bg);
+  border-radius: 20px;
+  padding: 1px 7px;
+}
+#app .sp-chev { color: var(--ink3); transition: transform 0.16s; }
+#app .sp-sec.open .sp-chev { transform: rotate(180deg); }
+#app .sp-sec-b { padding-bottom: 14px; }
+
+/* journey timeline */
+#app .sp-journey { list-style: none; }
+#app .sp-step { position: relative; display: flex; gap: 13px; padding-bottom: 16px; }
+#app .sp-step::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 14px;
+  bottom: -2px;
+  width: 2px;
+  background: var(--line);
+}
+#app .sp-step:last-child::before { display: none; }
+#app .sp-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-top: 2px;
+  flex-shrink: 0;
+  border: 2px solid var(--paper);
+  box-shadow: 0 0 0 1px var(--line);
+  z-index: 1;
+}
+#app .sp-step-h { display: flex; align-items: baseline; gap: 8px; }
+#app .sp-stage {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: var(--ink3);
+}
+#app .sp-time {
+  font-family: 'Spline Sans Mono', ui-monospace, Menlo, monospace;
+  font-size: 11.5px;
+  color: var(--ink3);
+}
+#app .sp-place { font-size: 14px; font-weight: 600; color: var(--ink); margin-top: 1px; }
+#app .sp-note { font-size: 13px; color: var(--ink2); margin-top: 2px; line-height: 1.4; }
+#app .sp-step.st-bad .sp-place { color: var(--red); }
+#app .sp-step.st-pending .sp-place { color: var(--ink3); font-weight: 500; }
+
+/* impact + resolution + log */
+#app .sp-iss { font-size: 14px; color: var(--ink2); line-height: 1.5; }
+#app .sp-iss b { color: var(--ink); font-weight: 600; }
+#app .sp-blast { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 11px; }
+#app .sp-tag {
+  font-size: 12.5px;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 4px 9px;
+}
+#app .sp-rec { font-size: 14px; color: var(--ink2); line-height: 1.5; }
+#app .sp-rec b { color: var(--ink); font-weight: 600; }
+#app .sp-log { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+#app .sp-log li { display: flex; gap: 12px; }
+#app .sp-log-t {
+  font-family: 'Spline Sans Mono', ui-monospace, Menlo, monospace;
+  font-size: 11.5px;
+  color: var(--ink3);
+  flex-shrink: 0;
+  width: 56px;
+  padding-top: 1px;
+}
+#app .sp-log-b { font-size: 13px; color: var(--ink2); line-height: 1.4; }
+#app .sp-log-b b { color: var(--ink); font-weight: 600; }
+
+/* ── Jira-like issues table ── */
+#app .tbl-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(20, 24, 30, 0.46);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 24px;
+  overflow-y: auto;
+}
+#app .tbl-modal {
+  background: var(--paper);
+  width: min(1040px, 100%);
+  max-height: 88vh;
+  border-radius: 16px;
+  box-shadow: 0 30px 80px rgba(20, 24, 30, 0.32);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+#app .tbl-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line2);
+  flex-shrink: 0;
+}
+#app .tbl-head-l { display: flex; align-items: center; gap: 10px; }
+#app .tbl-head h2 { font-size: 20px; font-weight: 700; }
+#app .tbl-count {
+  font-family: 'Spline Sans Mono', ui-monospace, Menlo, monospace;
+  font-size: 13px;
+  color: var(--ink2);
+  background: var(--bg);
+  border-radius: 20px;
+  padding: 2px 9px;
+}
+#app .tbl-head-r { display: flex; align-items: center; gap: 10px; }
+#app .tbl-search {
+  width: 280px;
+  border: 1px solid #ded7cd;
+  border-radius: 9px;
+  padding: 8px 12px;
+  font-family: 'Mukta', -apple-system, system-ui, sans-serif;
+  font-size: 13.5px;
+  color: var(--ink);
+  background: var(--paper);
+  outline: none;
+}
+#app .tbl-search:focus { border-color: var(--ink3); }
+#app .tbl-wrap { overflow: auto; flex: 1; }
+#app .tbl { width: 100%; border-collapse: collapse; }
+#app .tbl thead th {
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: var(--ink3);
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  z-index: 1;
+}
+#app .tbl td { padding: 13px 14px; border-bottom: 1px solid var(--line2); font-size: 15px; vertical-align: middle; }
+#app .tbl-c-exp { width: 34px; }
+#app .tbl-c-score { width: 70px; }
+#app .tbl-row { cursor: pointer; }
+#app .tbl-row:hover { background: var(--bg); }
+#app .tbl-exp {
+  border: none;
+  background: none;
+  color: var(--ink2);
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s, background 0.12s;
+}
+#app .tbl-exp:hover { background: #ece7e1; }
+#app .tbl-exp.on { transform: rotate(90deg); }
+#app .tbl-title {
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+#app .tbl-row:hover .tbl-title { color: var(--red); }
+#app .tbl-subn { font-size: 12.5px; font-weight: 600; color: var(--ink3); }
+#app .tbl-status { font-size: 14px; font-weight: 600; color: var(--sc); display: inline-flex; align-items: center; white-space: nowrap; }
+#app .tbl-status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--sc); margin-right: 6px; }
+#app .tbl-person { color: var(--ink2); }
+#app .tbl-dim { color: var(--ink3); }
+#app .tbl-win {
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 14px;
+  color: var(--ink2);
+  white-space: nowrap;
+}
+#app .tbl-sub { background: var(--bg); }
+#app .tbl-sub td { border-bottom: 1px solid var(--line2); }
+#app .tbl-sub-title { font-size: 14.5px; color: var(--ink2); display: inline-flex; align-items: center; }
+#app .tbl-sub-mark {
+  width: 12px;
+  height: 12px;
+  border-left: 1.5px solid var(--ink4);
+  border-bottom: 1.5px solid var(--ink4);
+  border-radius: 0 0 0 3px;
+  margin-right: 9px;
+  margin-left: 6px;
+}
+#app .tbl-empty { text-align: center; color: var(--ink3); padding: 28px; font-size: 14px; }
+
+/* ── loading skeleton for the issues table ── */
+@keyframes tblshimmer {
+  0% { background-position: -360px 0; }
+  100% { background-position: 360px 0; }
+}
+#app .skl {
+  display: inline-block;
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--line2) 0%, var(--line) 40%, var(--line2) 80%);
+  background-size: 360px 100%;
+  animation: tblshimmer 1.2s ease-in-out infinite;
+}
+#app .skl-line { height: 11px; vertical-align: middle; }
+#app .skl-pill { width: 78px; height: 20px; border-radius: 999px; }
+#app .skl-score { width: 34px; height: 22px; border-radius: 6px; }
+#app .skl-count { width: 22px; height: 20px; border-radius: 6px; }
+#app .tbl-skel-row td { border-bottom: 1px solid var(--line2); padding: 15px 14px; }
+
+/* ── all-issues full page + breadcrumbs ── */
+#app .issuespage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+#app .crumbs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+#app .crumb-link {
+  border: none;
+  background: none;
+  color: var(--ink2);
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+#app .crumb-link:hover { color: var(--red); }
+#app .crumb-sep { color: var(--ink3); font-size: 18px; }
+#app .crumb-cur { color: var(--ink); font-weight: 700; font-size: 17px; }
+#app .issuespanel {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+#app .tblpanel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* root cause needs breathing room before the next section / accordion */
+#app .sp-root { margin-bottom: 22px; }
+/* extra breathing room before the first accordion after the root-cause card */
+#app .sp-root + .sp-sec { margin-top: 4px; border-top: none; }
+
+/* recommended resolution block (under root cause) with accept / close */
+#app .sp-rec-block {
+  margin-top: 14px;
+  margin-bottom: 22px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 13px 14px;
+}
+/* the comments section sits below the recommendation — give it room */
+#app .sp-rec-block + .sp-comments { border-top: none; margin-top: 0; padding-top: 0; }
+#app .sp-rec-k {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink3);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+#app .sp-rec-v { font-size: 14px; color: var(--ink); line-height: 1.5; }
+#app .sp-rec-v b { font-weight: 700; }
+#app .sp-rec-acts { display: flex; gap: 9px; margin-top: 12px; }
+#app .sp-rec-accept,
+#app .sp-rec-dismiss {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 9px;
+  padding: 8px 14px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+#app .sp-rec-accept {
+  border: none;
+  background: var(--green);
+  color: #fff;
+}
+#app .sp-rec-accept:hover { background: #368746; }
+#app .sp-rec-dismiss {
+  border: 1px solid #ded7cd;
+  background: var(--paper);
+  color: var(--ink2);
+}
+#app .sp-rec-dismiss:hover { border-color: #cdc4b7; color: var(--ink); }
+#app .sp-rec-state {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 11px;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+#app .sp-rec-state.accepted { color: var(--green); }
+#app .sp-rec-state.accepted::before {
+  content: '✓';
+  margin-right: 7px;
+}
+#app .sp-rec-state.dismissed { color: var(--ink3); }
+#app .sp-rec-state.dismissed::before {
+  content: '✕';
+  margin-right: 7px;
+}
+#app .sp-rec-block.accepted { background: var(--paper); border-color: var(--line); }
+
+/* post-accept follow-up: your next steps + background actions */
+#app .sp-followup { margin-top: 12px; }
+#app .sp-fu-grp { margin-top: 14px; }
+#app .sp-fu-grp:first-of-type { margin-top: 12px; }
+#app .sp-fu-k {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink3);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+#app .sp-fu { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+#app .sp-fu li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--ink);
+  line-height: 1.4;
+}
+/* todo steps stack a row + an optional composer; background items stay inline */
+#app .sp-fu.todo li { flex-direction: column; align-items: stretch; gap: 8px; }
+#app .sp-fu-row { display: flex; align-items: flex-start; gap: 10px; }
+/* numbered sequential step indicator */
+#app .sp-fu-ind {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: 'Spline Sans Mono', ui-monospace, Menlo, monospace;
+  font-size: 11.5px;
+  font-weight: 700;
+  border: 1.5px solid transparent;
+  padding: 0;
+}
+#app .sp-fu-ind.active {
+  background: var(--paper);
+  border-color: #cdc4b7;
+  color: var(--ink2);
+  cursor: pointer;
+}
+#app .sp-fu-ind.active:hover { border-color: var(--ink3); color: var(--ink); }
+#app .sp-fu-ind.locked { background: var(--bg); color: var(--ink4); }
+#app .sp-fu-ind.done {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+  cursor: pointer;
+}
+#app .sp-fu-ind.done:hover { background: #368746; }
+/* the per-step Assign dropdown stays compact on the right of the row */
+#app .sp-fu-row .dd { flex-shrink: 0; }
+#app .sp-fu-row .dd-trig { padding: 5px 10px; font-size: 12.5px; }
+/* a decision step the operator actions directly (Approve / Authorise) */
+#app .sp-fu-do {
+  flex-shrink: 0;
+  border: none;
+  border-radius: 7px;
+  background: var(--ink);
+  color: #fff;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+#app .sp-fu-do:hover { background: #000; }
+#app .sp-fu-by {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink3);
+  white-space: nowrap;
+  padding-top: 4px;
+}
+/* opt out of the recommendation */
+#app .sp-ownway {
+  margin-top: 12px;
+  border: none;
+  background: none;
+  color: var(--blue);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+#app .sp-ownway:hover { text-decoration: underline; }
+/* brief "applying recovery" loader shown before the status/score settle */
+#app .sp-resolving {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink2);
+}
+#app .sp-spin {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  border-top-color: var(--blue);
+  animation: spspin 0.7s linear infinite;
+}
+@keyframes spspin {
+  to { transform: rotate(360deg); }
+}
+#app .sp-linkbtn {
+  border: none;
+  background: none;
+  color: var(--blue);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+#app .sp-linkbtn:hover { text-decoration: underline; }
+/* message composer under a step */
+#app .sp-msg {
+  margin-left: 28px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 11px;
+}
+#app .sp-msg-to { font-size: 12.5px; color: var(--ink2); margin-bottom: 7px; }
+#app .sp-msg-to b { color: var(--ink); font-weight: 700; }
+#app .sp-msg-input {
+  width: 100%;
+  border: 1px solid #ded7cd;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--paper);
+  outline: none;
+  resize: vertical;
+  line-height: 1.45;
+}
+#app .sp-msg-input:focus { border-color: var(--ink3); }
+#app .sp-msg-acts { display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-top: 8px; }
+#app .sp-msg-cancel {
+  border: none;
+  background: none;
+  color: var(--ink2);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 8px;
+}
+#app .sp-msg-cancel:hover { color: var(--ink); }
+#app .sp-msg-send {
+  border: none;
+  background: var(--ink);
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#app .sp-msg-send:hover { background: #2a2a2c; }
+#app .sp-msg-send:disabled { opacity: 0.4; cursor: not-allowed; }
+#app .sp-fu-cta.on { border-color: var(--ink3); background: var(--bg); }
+#app .sp-fu-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  border: 1.5px solid #cdc4b7;
+  background: var(--paper);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+#app .sp-fu-check:hover { border-color: var(--ink3); }
+#app .sp-fu.todo li.on .sp-fu-check {
+  background: var(--green);
+  border-color: var(--green);
+}
+#app .sp-fu.todo li.on .sp-fu-check:hover { background: #368746; border-color: #368746; }
+#app .sp-fu-txt { flex: 1; min-width: 0; }
+#app .sp-fu.todo li.on .sp-fu-txt { color: var(--ink3); text-decoration: line-through; }
+#app .sp-fu-cta {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid #ded7cd;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 4px 11px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  margin-top: -1px;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+#app .sp-fu-cta:hover { border-color: var(--ink3); background: var(--bg); }
+/* completed step → an "Undo" button */
+#app .sp-fu-cta.done {
+  border-color: transparent;
+  background: var(--greenbg);
+  color: var(--green);
+}
+#app .sp-fu-cta.done:hover { background: var(--redbg); color: var(--red); border-color: transparent; }
+/* call affordance: tel: link on Apple, plain number elsewhere — always visible */
+#app .sp-fu-call {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Spline Sans Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 4px 9px;
+  margin-top: -1px;
+}
+#app a.sp-fu-call {
+  color: var(--blue);
+  border-color: #cdd8f6;
+  background: var(--bluebg);
+}
+#app a.sp-fu-call:hover { background: #e2e9fd; }
+#app .sp-fu-call.num {
+  color: var(--ink3);
+  border-color: var(--line);
+  background: var(--bg);
+  cursor: default;
+}
+#app .sp-fu-auto {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--greenbg);
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+/* still running → a spinner instead of the green check */
+#app .sp-fu-auto.run {
+  background: var(--paper);
+  border: 2px solid var(--line);
+  border-top-color: var(--ink3);
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+#app .sp-bg-run { color: var(--ink3); font-size: 12px; }
+/* background who/when log line */
+#app .sp-fu.bg li { align-items: flex-start; }
+#app .sp-bg-b { flex: 1; min-width: 0; }
+#app .sp-bg-text { font-size: 13.5px; color: var(--ink); line-height: 1.35; }
+#app .sp-bg-meta { font-size: 11.5px; color: var(--ink3); margin-top: 1px; }
+/* sequential steps: locked rows are muted with a lock */
+#app .sp-fu.seq li.locked .sp-fu-txt { color: var(--ink3); }
+#app .sp-fu-check.lock {
+  border-color: var(--line);
+  background: var(--bg);
+  color: var(--ink4);
+  cursor: default;
+}
+#app .sp-fu.bg li > span:last-child { color: var(--ink2); }
+
+/* comments + activity feed */
+#app .sp-comments {
+  border-top: 1px solid var(--line2);
+  margin-top: 8px;
+  padding-top: 15px;
+}
+#app .sp-comments-h { margin-bottom: 13px; }
+#app .sp-cfeed { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+#app .sp-cfeed li { display: flex; gap: 10px; }
+#app .sp-c-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--brandgrey);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+#app .sp-cfeed li.sys .sp-c-avatar {
+  background: var(--bg);
+  color: var(--ink3);
+  border: 1px solid var(--line);
+  font-size: 15px;
+}
+#app .sp-c-b { flex: 1; min-width: 0; }
+#app .sp-c-h { display: flex; align-items: baseline; gap: 8px; }
+#app .sp-c-h b { font-size: 13.5px; color: var(--ink); font-weight: 700; }
+#app .sp-c-t {
+  font-family: 'Spline Sans Mono', ui-monospace, Menlo, monospace;
+  font-size: 11px;
+  color: var(--ink3);
+}
+#app .sp-c-text { font-size: 13.5px; color: var(--ink2); line-height: 1.45; margin-top: 2px; }
+#app .mention {
+  color: var(--blue);
+  background: var(--bluebg);
+  font-weight: 600;
+  border-radius: 5px;
+  padding: 0 4px;
+}
+#app .sp-cbox { margin-top: 15px; }
+#app .sp-ta-wrap { position: relative; }
+/* inline @mention suggestions */
+#app .sp-mentionbox {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% - 2px);
+  z-index: 20;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(20, 24, 30, 0.16);
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+#app .sp-mention-opt {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  padding: 7px 8px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+#app .sp-mention-opt:hover { background: var(--bg); }
+#app .sp-mention-av {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--brandgrey);
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+#app .sp-chint { font-size: 12px; color: var(--ink3); }
+#app .sp-cinput {
+  width: 100%;
+  border: 1px solid #ded7cd;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: var(--ink);
+  background: var(--paper);
+  outline: none;
+  resize: vertical;
+  line-height: 1.4;
+}
+#app .sp-cinput:focus { border-color: var(--ink3); }
+#app .sp-cbox-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 9px;
+}
+#app .sp-cpost {
+  border: none;
+  background: var(--ink);
+  color: #fff;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background 0.12s, opacity 0.12s;
+}
+#app .sp-cpost:hover { background: #2a2a2c; }
+#app .sp-cpost:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── responsive ── */
+@media (max-width: 1180px) {
+  #app .grid { grid-template-columns: 1fr 332px; }
+}
+@media (max-width: 1020px) {
+  #app .grid { grid-template-columns: 1fr 300px; gap: 11px; }
+  #app .viewhead { flex-wrap: wrap; gap: 10px 16px; }
+}
+@media (max-width: 720px) {
+  #app .fresh { display: none; }
+  #app .viewhead .topfilters { width: 100%; }
+}
+/* stack the wide issue panel into one column when it can't fit two */
+@media (max-width: 900px) {
+  #app .sp-body.sp-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    overflow-y: auto; /* stacked → the whole panel scrolls as one */
+  }
+  #app .sp-col { overflow: visible; min-height: 0; }
+  #app .sp-col-r { border-left: none; border-top: 1px solid var(--line2); }
+}
