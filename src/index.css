@@ -1884,6 +1884,68 @@ body {
   color: var(--sc);
   background: color-mix(in srgb, var(--sc) 13%, transparent);
 }
+/* live priority-score breakdown — shows the model behind the number */
+#app .sp-score {
+  margin-top: 13px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 13px;
+  background: var(--paper);
+}
+#app .sp-score-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 9px;
+}
+#app .sp-score-t {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink2);
+}
+#app .sp-score-f {
+  font-size: 11.5px;
+  color: var(--ink3);
+}
+#app .sp-score-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px 16px;
+}
+#app .sp-score-c {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+#app .sp-score-k {
+  font-size: 11px;
+  color: var(--ink3);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+#app .sp-score-v {
+  font-size: 12.5px;
+  color: var(--ink2);
+}
+#app .sp-score-v b {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  margin-right: 4px;
+  border-radius: 5px;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 11.5px;
+  font-weight: 700;
+}
 #app .sp-chips {
   display: flex;
   flex-wrap: wrap;

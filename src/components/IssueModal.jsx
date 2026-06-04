@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import Icon from './Icon.jsx'
 import Dropdown from './Dropdown.jsx'
 import RouteMap from './RouteMap.jsx'
+import { impactScore, scoreLabels, SCORE_MODEL } from '../data.js'
 
 const J_STATE = { ok: '#3f9d52', warn: '#b9791a', bad: '#cc0000', pending: '#c7c1b8' }
 
@@ -143,7 +144,11 @@ export default function IssueModal({ issue, onClose, onPatch }) {
       // de-escalate, but not instantly: show a brief "applying recovery" loader
       // so it reads like the system is propagating the change, THEN flip the
       // status, drop the priority score and reframe the "viable for" countdown.
-      const newScore = Math.max(1, Math.round(issue.score * 0.5))
+      // recompute via the scoring model: recovery underway eases time-to-failure,
+      // and containing the issue shrinks its radius and customer exposure.
+      const newScore = issue.sc
+        ? impactScore({ ...issue.sc, timeToFailure: 1, impactRadius: 1, customerExposure: 1 })
+        : Math.max(1, Math.round(issue.score * 0.5))
       setResolving(true)
       addComment(ME, 'All steps assigned — applying recovery…')
       resolveTimer.current = setTimeout(() => {
@@ -282,6 +287,26 @@ export default function IssueModal({ issue, onClose, onPatch }) {
             ))}
             <span className="chip plain">{d.where}</span>
           </div>
+          {issue.sc && (
+            <div className="sp-score">
+              <div className="sp-score-head">
+                <span className="sp-score-t">Priority score</span>
+                <span className="sp-score-f">
+                  (Value + 2·Urgency + Impact radius + Customer exposure) ÷ 22 × 100
+                </span>
+              </div>
+              <div className="sp-score-grid">
+                {['value', 'perishability', 'timeToFailure', 'impactRadius', 'customerExposure'].map((k) => (
+                  <div className="sp-score-c" key={k}>
+                    <span className="sp-score-k">{scoreLabels[k]}</span>
+                    <span className="sp-score-v">
+                      <b>{issue.sc[k]}</b> {SCORE_MODEL[k][issue.sc[k]]}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="sp-body sp-grid">

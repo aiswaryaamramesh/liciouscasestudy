@@ -94,11 +94,45 @@ export const SKU = {
   TU30YE: 'Tulip · 30" · Yellow',
 }
 
+// ── Priority scoring model ───────────────────────────────────────────────────
+// Impact score = (Value + 2·Urgency + Impact radius + Customer exposure) / 22 ×100
+// where Urgency = Perishability + Time to failure.
+// Max = 3 + 2·(3+3) + 4 + 3 = 22, so the score normalises to 0–100. Each issue
+// carries its component buckets in `sc`, and the score below is COMPUTED from them.
+export const SCORE_MODEL = {
+  value: { 3: '₹2L–3L', 2: '₹75k–2L', 1: 'Up to ₹75k' },
+  perishability: {
+    3: 'Short life · 3–8 days (roses, tulips)',
+    2: 'Medium · 5–10 days (lilies, marigold)',
+    1: 'Long · 14–20 days (carnation, orchid)',
+  },
+  timeToFailure: { 3: '< 2 hours', 2: '2–6 hours', 1: '> 6 hours' },
+  impactRadius: {
+    4: 'Multiple warehouses',
+    3: 'Multiple hubs / one warehouse',
+    2: 'One hub',
+    1: 'Single route',
+  },
+  customerExposure: { 3: '100+ orders', 2: '10–100 orders', 1: '1–10 orders' },
+}
+export const scoreLabels = {
+  value: 'Value at risk',
+  perishability: 'Perishability',
+  timeToFailure: 'Time to failure',
+  impactRadius: 'Impact radius',
+  customerExposure: 'Customer exposure',
+}
+export function impactScore(c) {
+  const urgency = c.perishability + c.timeToFailure
+  return Math.round(((c.value + 2 * urgency + c.impactRadius + c.customerExposure) / 22) * 100)
+}
+
 // ── Issues (each tagged with the node keys it belongs to) ────────────────────
 export const issues = [
   {
-    id: 'roses', sev: 'crit', score: 86, title: 'RO40RE dying in transit',
+    id: 'roses', sev: 'crit', title: 'RO40RE dying in transit',
     clkLabel: 'Viable for', clk: '6h 10m', urgent: true, orders: '~1,800 affected',
+    sc: { value: 3, perishability: 3, timeToFailure: 1, impactRadius: 3, customerExposure: 3 },
     chips: [['flower', '1,200 × RO40RE'], ['cart', '~1,800 orders']],
     nodes: ['wh-mng', 'rt-delayed'],
     detail: {
@@ -109,8 +143,9 @@ export const issues = [
     },
   },
   {
-    id: 'refrig', sev: 'crit', score: 74, title: 'Refrigeration failure',
+    id: 'refrig', sev: 'crit', title: 'Refrigeration failure',
     clkLabel: 'Viable for', clk: '1h 30m', urgent: true, orders: '~1,100 affected',
+    sc: { value: 2, perishability: 3, timeToFailure: 3, impactRadius: 3, customerExposure: 3 },
     chips: [['box', '₹80k load'], ['cart', '~1,100 orders']],
     nodes: ['wh-cbe', 'hub-delayed', 'wh-koc'],
     detail: {
@@ -121,8 +156,9 @@ export const issues = [
     },
   },
   {
-    id: 'corp', sev: 'high', score: 73, title: 'Corporate order delivery failed', customer: true,
+    id: 'corp', sev: 'high', title: 'Corporate order delivery failed', customer: true,
     clkLabel: 'Recover in', clk: '40m', urgent: true, orders: '1 bulk order',
+    sc: { value: 2, perishability: 2, timeToFailure: 3, impactRadius: 1, customerExposure: 1 },
     chips: [['flower', 'Bulk order'], ['refund', 'Refund risk']],
     nodes: ['rt-delayed', 'wh-blr'],
     detail: {
@@ -133,8 +169,9 @@ export const issues = [
     },
   },
   {
-    id: 'blr-ovl', sev: 'smoke', score: 52, title: 'Bangalore overload forming',
+    id: 'blr-ovl', sev: 'smoke', title: 'Bangalore overload forming',
     clkLabel: 'Breaches in', clk: '~2h', urgent: false,
+    sc: { value: 1, perishability: 2, timeToFailure: 2, impactRadius: 4, customerExposure: 3 },
     chips: [['warehouse', '8 WH'], ['bars', '91%']],
     nodes: ['wh-blr'],
     detail: {
@@ -145,8 +182,9 @@ export const issues = [
     },
   },
   {
-    id: 'che-sku', sev: 'smoke', score: 44, title: 'Chennai SKU depletion',
+    id: 'che-sku', sev: 'smoke', title: 'Chennai SKU depletion',
     clkLabel: 'Stockout in', clk: '~5h', urgent: false,
+    sc: { value: 1, perishability: 1, timeToFailure: 2, impactRadius: 3, customerExposure: 3 },
     chips: [['flower', 'CA50PK']],
     nodes: ['wh-che'],
     detail: {
@@ -157,8 +195,9 @@ export const issues = [
     },
   },
   {
-    id: 'nil-fog', sev: 'smoke', score: 38, title: 'Nilgiris inbound slow (fog)',
+    id: 'nil-fog', sev: 'smoke', title: 'Nilgiris inbound slow (fog)',
     clkLabel: 'Delay', clk: '+45m', urgent: false,
+    sc: { value: 1, perishability: 3, timeToFailure: 1, impactRadius: 2, customerExposure: 1 },
     chips: [['flower', 'RO40RE · CA50PK'], ['clock', '+45m']],
     nodes: ['prod-NIL', 'wh-cbe'],
     detail: {
@@ -416,9 +455,11 @@ const recoveryPlan = {
     { stage: 'Producer', place: 'Nilgiris belt', state: 'ok', time: 'now', note: 'Cutoff pulled forward; buffer pre-staged — AM cutoff safe' },
   ],
 }
-issues.forEach((i) =>
-  Object.assign(i, issueExtras[i.id] || {}, acceptPlan[i.id] || {}, { recovery: recoveryPlan[i.id] || [] }),
-)
+issues.forEach((i) => {
+  Object.assign(i, issueExtras[i.id] || {}, acceptPlan[i.id] || {}, { recovery: recoveryPlan[i.id] || [] })
+  // the priority score is derived from the scoring model, not hardcoded
+  if (i.sc) i.score = impactScore(i.sc)
+})
 
 // ── Per-node context (metrics shown in the right panel) ─────────────────────
 const M = (k, v, tone) => ({ k, v, tone: tone || 'none' })
