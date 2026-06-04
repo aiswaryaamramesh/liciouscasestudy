@@ -78,12 +78,12 @@ function IssueCard({ issue, onSee }) {
     <div className={`ac ${issue.sev}`} onClick={onSee} style={{ cursor: 'pointer' }}>
       <div className="r1">
         <div className="tt">{issue.title}</div>
-        <span className={`score ${scoreTone(issue.score)}`} title="Priority score">
-          {issue.score}
-        </span>
         {issue.status && (
           <span className="chip stat" style={{ '--sc': statusColor(issue.status) }}>{issue.status}</span>
         )}
+        <span className={`score ${scoreTone(issue.score)}`} title="Priority score">
+          {issue.score}
+        </span>
       </div>
       <div className="ac-meta">
         <div className="acm">
