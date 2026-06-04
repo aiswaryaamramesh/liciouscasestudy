@@ -298,7 +298,7 @@ const issueExtras = {
     ],
   },
   'blr-ovl': {
-    owner: 'Vikram S.', assignee: 'Aiswarya Ramesh', status: 'Preventing',
+    owner: 'Vikram S.', assignee: 'Aiswarya Ramesh', status: 'Open',
     rootCause: 'Inbound is arriving faster than outbound throughput, pushing the Bangalore cluster toward 91% — it breaches capacity in ~2h at the current pull.',
     team: { kind: 'warehouse', name: 'Bangalore WH ops', people: [P.vikram, P.meera] },
     journey: [
@@ -318,7 +318,7 @@ const issueExtras = {
     ],
   },
   'che-sku': {
-    owner: 'Karthik V.', assignee: 'Aiswarya Ramesh', status: 'Monitoring',
+    owner: 'Karthik V.', assignee: 'Aiswarya Ramesh', status: 'Open',
     rootCause: 'CA50PK pull rate exceeds replenishment at Chennai · Adyar — on-hand has dropped below the reorder point, trending to stockout in ~5h.',
     team: { kind: 'warehouse', name: 'Chennai inventory team', people: [P.karthik, P.lakshmi] },
     journey: [
@@ -337,7 +337,7 @@ const issueExtras = {
     ],
   },
   'nil-fog': {
-    owner: 'Suresh M.', assignee: 'Aiswarya Ramesh', status: 'Monitoring',
+    owner: 'Suresh M.', assignee: 'Aiswarya Ramesh', status: 'Open',
     rootCause: 'Hill fog is slowing morning intake at the Nilgiris belt, running dispatch +45m and putting the Coimbatore AM cutoff at risk.',
     team: { kind: 'producer', name: 'Nilgiris belt coordinators', people: [P.suresh] },
     journey: [
