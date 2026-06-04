@@ -1884,66 +1884,71 @@ body {
   color: var(--sc);
   background: color-mix(in srgb, var(--sc) 13%, transparent);
 }
-/* live priority-score breakdown — shows the model behind the number */
-#app .sp-score {
-  margin-top: 13px;
-  border: 1px solid var(--line);
+/* priority-score breakdown shown only on hover/focus of the score tag */
+#app .sp-score-tag {
+  position: relative;
+  cursor: help;
+}
+#app .sp-score-tip {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 60;
+  width: 300px;
+  padding: 11px 12px;
+  background: #2a2622;
+  color: #fff;
   border-radius: 10px;
-  padding: 11px 13px;
-  background: var(--paper);
+  box-shadow: 0 14px 38px rgba(20, 24, 30, 0.34);
+  font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  letter-spacing: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.14s, transform 0.14s, visibility 0.14s;
+  pointer-events: none;
 }
-#app .sp-score-head {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 9px;
+#app .sp-score-tag:hover .sp-score-tip,
+#app .sp-score-tag:focus-visible .sp-score-tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
-#app .sp-score-t {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--ink2);
-}
-#app .sp-score-f {
-  font-size: 11.5px;
-  color: var(--ink3);
-}
-#app .sp-score-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 7px 16px;
-}
-#app .sp-score-c {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  min-width: 0;
-}
-#app .sp-score-k {
+#app .sp-score-tip-f {
+  display: block;
   font-size: 11px;
-  color: var(--ink3);
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.45;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+#app .sp-score-tip-r {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 3px 0;
+}
+#app .sp-score-tip-k {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}
+#app .sp-score-tip-v {
+  font-size: 12px;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
+  text-align: right;
 }
-#app .sp-score-v {
-  font-size: 12.5px;
-  color: var(--ink2);
-}
-#app .sp-score-v b {
+#app .sp-score-tip-v b {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 17px;
-  height: 17px;
-  padding: 0 4px;
-  margin-right: 4px;
-  border-radius: 5px;
-  background: var(--bg);
-  color: var(--ink);
-  font-size: 11.5px;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 11px;
   font-weight: 700;
 }
 #app .sp-chips {

@@ -273,7 +273,24 @@ export default function IssueModal({ issue, onClose, onPatch }) {
             <h2>{issue.title}</h2>
             <div className="sp-ttags">
               <span className="sp-status-pill" style={{ '--sc': statusColor(status) }}>{status}</span>
-              <span className={`score ${scoreTone(issue.score)}`}>{issue.score}</span>
+              <span className={`score ${scoreTone(issue.score)} sp-score-tag`} tabIndex={issue.sc ? 0 : undefined}>
+                {issue.score}
+                {issue.sc && (
+                  <span className="sp-score-tip" role="tooltip">
+                    <span className="sp-score-tip-f">
+                      (Value + 2·Urgency + Impact radius + Customer exposure) ÷ 22 × 100
+                    </span>
+                    {['value', 'perishability', 'timeToFailure', 'impactRadius', 'customerExposure'].map((k) => (
+                      <span className="sp-score-tip-r" key={k}>
+                        <span className="sp-score-tip-k">{scoreLabels[k]}</span>
+                        <span className="sp-score-tip-v">
+                          <b>{issue.sc[k]}</b> {SCORE_MODEL[k][issue.sc[k]]}
+                        </span>
+                      </span>
+                    ))}
+                  </span>
+                )}
+              </span>
             </div>
           </div>
           <div className="sp-chips">
@@ -287,26 +304,6 @@ export default function IssueModal({ issue, onClose, onPatch }) {
             ))}
             <span className="chip plain">{d.where}</span>
           </div>
-          {issue.sc && (
-            <div className="sp-score">
-              <div className="sp-score-head">
-                <span className="sp-score-t">Priority score</span>
-                <span className="sp-score-f">
-                  (Value + 2·Urgency + Impact radius + Customer exposure) ÷ 22 × 100
-                </span>
-              </div>
-              <div className="sp-score-grid">
-                {['value', 'perishability', 'timeToFailure', 'impactRadius', 'customerExposure'].map((k) => (
-                  <div className="sp-score-c" key={k}>
-                    <span className="sp-score-k">{scoreLabels[k]}</span>
-                    <span className="sp-score-v">
-                      <b>{issue.sc[k]}</b> {SCORE_MODEL[k][issue.sc[k]]}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
 
         <div className="sp-body sp-grid">
