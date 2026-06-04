@@ -8,6 +8,51 @@ body {
   background: #f7f4f1;
 }
 
+/* ── mobile gate ── the dashboard is a wide desktop surface; on small screens
+   hide it entirely and show a friendly "open on desktop" notice instead. */
+.mobile-gate {
+  display: none;
+}
+@media (max-width: 768px) {
+  #app {
+    display: none !important;
+  }
+  .mobile-gate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
+    padding: 32px 28px;
+    gap: 14px;
+    background: #f7f4f1;
+    color: #3a3a3c;
+    font-family: 'Mukta', 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mobile-gate .logo {
+    width: 44px;
+    height: 44px;
+  }
+  .mobile-gate .logo ellipse {
+    fill: #cc0000;
+  }
+  .mobile-gate h1 {
+    margin: 4px 0 0;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .mobile-gate p {
+    margin: 0;
+    max-width: 320px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #6b6660;
+  }
+}
+
 #app *,
 #app *::before,
 #app *::after {
@@ -1243,6 +1288,7 @@ body {
 #app .mgrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr; /* every tile the same height regardless of value length */
   gap: 9px;
   min-width: 0;
 }
@@ -1250,8 +1296,11 @@ body {
   background: var(--bg);
   border: 1px solid var(--line);
   border-radius: 12px;
-  padding: 11px 13px;
+  padding: 12px 13px;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 #app .mtile .mk {
   font-size: 15px;
@@ -1263,7 +1312,7 @@ body {
   font-size: 24.5px;
   font-weight: 700;
   letter-spacing: -0.02em;
-  margin-top: 3px;
+  margin-top: auto; /* values sit on a common baseline across tiles */
   font-family: 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   overflow-wrap: anywhere;
 }

@@ -435,21 +435,25 @@ const PRODUCER_META = {
   THR: { share: 10, ontime: '93%', grows: 'GE30MX, AN35RD', feeds: 'Kochi' },
 }
 
+// every producer belt shows the SAME four numeric attributes; the descriptive
+// "grows / feeds" detail moves to the subtitle so the tiles stay uniform.
 const producerDetails = Object.fromEntries(
   sankeyCols[0].map((p) => {
     const code = p.key.split('-')[1]
     const meta = PRODUCER_META[code]
+    const fed = meta.feeds.split(',').length
+    const stems = `${(meta.share * 0.2).toFixed(1)}k`
     return [
       p.key,
       {
         name: p.n,
-        sub: 'Producer belt',
+        sub: `Producer belt · grows ${meta.grows}`,
         status: meta.warn ? 'warn' : 'ok',
         metrics: [
           M('Dispatch on-time', meta.ontime, meta.warn ? 'a' : 'ok'),
           M('Volume share', `${meta.share}%`),
-          M('Grows', meta.grows),
-          M('Feeds', meta.feeds),
+          M('Daily stems', stems),
+          M('Warehouses fed', String(fed)),
         ],
       },
     ]
@@ -469,49 +473,52 @@ export const nodeDetails = {
     ],
   },
   ...producerDetails,
+  // ── warehouses: shared schema · Capacity / On-time / Low-stock SKUs / Orders at risk
   'wh-blr': {
     name: 'Bangalore ×8', sub: 'Warehouse cluster', status: 'warn',
-    metrics: [M('Capacity', '91%', 'a'), M('Overflow ETA', '~2h', 'a'), M('Throughput', '1.2k/h', 'ok'), M('Inbound', 'Hosur due')],
+    metrics: [M('Capacity', '91%', 'a'), M('On-time', '89%', 'a'), M('Low-stock SKUs', '2', 'a'), M('Orders at risk', '~600', 'a')],
   },
   'wh-che': {
     name: 'Chennai ×7', sub: 'Warehouse cluster', status: 'warn',
-    metrics: [M('Capacity', '74%', 'ok'), M('CA50PK', 'Stockout ~5h', 'a'), M('On-time', '92%', 'ok'), M('SKUs low', '1', 'a')],
+    metrics: [M('Capacity', '74%', 'ok'), M('On-time', '92%', 'ok'), M('Low-stock SKUs', '1', 'a'), M('Orders at risk', '~120', 'a')],
   },
   'wh-hyd': {
     name: 'Hyderabad ×5', sub: 'Warehouse cluster', status: 'ok',
-    metrics: [M('Capacity', '63%', 'ok'), M('On-time', '95%', 'ok'), M('SKUs low', '0', 'ok'), M('Throughput', '0.8k/h', 'ok')],
+    metrics: [M('Capacity', '63%', 'ok'), M('On-time', '95%', 'ok'), M('Low-stock SKUs', '0', 'ok'), M('Orders at risk', '0', 'ok')],
   },
   'wh-cbe': {
     name: 'Coimbatore ×3', sub: 'Warehouse cluster', status: 'bad',
-    metrics: [M('Cold-chain', 'FAILED', 'r'), M('Orders at risk', '~1,100', 'r'), M('Value at risk', '₹80k', 'r'), M('Capacity', '78%', 'ok')],
+    metrics: [M('Capacity', '78%', 'ok'), M('On-time', '64%', 'r'), M('Low-stock SKUs', '3', 'r'), M('Orders at risk', '~1,100', 'r')],
   },
   'wh-koc': {
     name: 'Kochi ×3', sub: 'Warehouse cluster', status: 'warn',
-    metrics: [M('Inbound', 'CBE at risk', 'a'), M('On-time', '86%', 'a'), M('Orders today', '~1,100'), M('Capacity', '70%', 'ok')],
+    metrics: [M('Capacity', '70%', 'ok'), M('On-time', '86%', 'a'), M('Low-stock SKUs', '1', 'a'), M('Orders at risk', '~1,100', 'a')],
   },
   'wh-mys': {
     name: 'Mysore ×2', sub: 'Warehouse cluster · overflow', status: 'ok',
-    metrics: [M('Capacity', '44%', 'ok'), M('Spare', 'High', 'ok'), M('On-time', '94%', 'ok'), M('Role', 'Overflow buffer')],
+    metrics: [M('Capacity', '44%', 'ok'), M('On-time', '94%', 'ok'), M('Low-stock SKUs', '0', 'ok'), M('Orders at risk', '0', 'ok')],
   },
   'wh-mng': {
     name: 'Mangalore ×2', sub: 'Warehouse cluster · inbound-dependent', status: 'bad',
-    metrics: [M('Inbound', 'Delayed 5h', 'r'), M('AM slots', '~1,800', 'r'), M('Local growers', 'None', 'a'), M('On-time', '61%', 'r')],
+    metrics: [M('Capacity', '58%', 'ok'), M('On-time', '61%', 'r'), M('Low-stock SKUs', '1', 'a'), M('Orders at risk', '~1,800', 'r')],
   },
+  // ── hubs: shared schema · Hubs / On-time / Avg delay / Orders held
   'hub-ontime': {
     name: 'Hubs on time', sub: 'City hub sorting', status: 'ok',
-    metrics: [M('Hubs', '78', 'ok'), M('On-time', '88%', 'ok'), M('Sorting', 'Normal', 'ok')],
+    metrics: [M('Hubs', '78', 'ok'), M('On-time', '95%', 'ok'), M('Avg delay', '3m', 'ok'), M('Orders held', '0', 'ok')],
   },
   'hub-delayed': {
     name: 'Hubs delayed', sub: 'City hub sorting', status: 'bad',
-    metrics: [M('Hubs', '12', 'r'), M('Behind cutoff', 'Yes', 'r'), M('Cause', 'CBE · MNG', 'a')],
+    metrics: [M('Hubs', '12', 'r'), M('On-time', '44%', 'r'), M('Avg delay', '90m', 'r'), M('Orders held', '~2.3k', 'r')],
   },
+  // ── routes: shared schema · Routes / On-time / Customer-visible / Perishable-loaded
   'rt-ontime': {
     name: 'Routes on-time', sub: 'Last-mile delivery', status: 'ok',
-    metrics: [M('Routes', '~454', 'ok'), M('On-time', '84%', 'a'), M('ETA drift', 'Low', 'ok')],
+    metrics: [M('Routes', '~454', 'ok'), M('On-time', '96%', 'ok'), M('Customer-visible', '0', 'ok'), M('Perishable-loaded', '0', 'ok')],
   },
   'rt-delayed': {
     name: 'Routes delayed', sub: 'Last-mile delivery', status: 'bad',
-    metrics: [M('Routes', '~46', 'r'), M('Customer-visible', '1', 'r'), M('Perishable-loaded', '4', 'a')],
+    metrics: [M('Routes', '~46', 'r'), M('On-time', '38%', 'r'), M('Customer-visible', '1', 'r'), M('Perishable-loaded', '4', 'a')],
   },
 }
 

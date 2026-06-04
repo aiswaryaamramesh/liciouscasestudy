@@ -62,7 +62,16 @@ export default function App() {
   )
 
   return (
-    <div id="app">
+    <>
+      <div className="mobile-gate">
+        <FlowerLogo />
+        <h1>Best viewed on desktop</h1>
+        <p>
+          Bloomline · Control Tower is a wide operations dashboard built for a big screen.
+          Please open it on a desktop or laptop to explore the network flow. :)
+        </p>
+      </div>
+      <div id="app">
       <nav className="topbar">
         <div className="l">
           <FlowerLogo />
@@ -108,6 +117,7 @@ export default function App() {
       ) : (
         <AllIssuesPage onBack={() => setPage('dashboard')} overrides={issueOverrides} onPatch={patchIssue} />
       )}
-    </div>
+      </div>
+    </>
   )
 }
